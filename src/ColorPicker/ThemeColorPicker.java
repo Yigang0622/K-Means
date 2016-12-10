@@ -36,11 +36,8 @@ public class ThemeColorPicker {
 
     public void getThemeColor(){
 
-        System.out.println("开始分析图片主色调");
-
         KMeans kMeans = new KMeans(vectors,colorNumber);
         kMeans.startClustering();
-        System.out.println("分析完成");
         List<Cluster> clusters = kMeans.getClusters();
 
         List<MyVector> vectors = new ArrayList<>();
@@ -102,8 +99,8 @@ public class ThemeColorPicker {
     }
 
     public static void main(String[] args){
-        ThemeColorPicker picker = new ThemeColorPicker("C:\\Users\\Mike\\Desktop\\1.png");
-        picker.setColorNumber(8);
+        ThemeColorPicker picker = new ThemeColorPicker("/Users/Mike/Desktop/1.jpg");
+        picker.setColorNumber(5);
         picker.getThemeColor();
     }
 

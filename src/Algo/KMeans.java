@@ -10,7 +10,6 @@ import java.util.List;
 public class KMeans {
 
     private List<MyVector> vectors = new ArrayList<>();
-
     private List<MyVector> centers = new ArrayList<>(); //质心
 
     private int numberOfCluster = 0;
@@ -23,8 +22,6 @@ public class KMeans {
         this.numberOfCluster = numberOfCluster;
         initCenters();
         initClusters();
-
-
     }
 
     public List<Cluster> getClusters(){
@@ -59,10 +56,9 @@ public class KMeans {
         boolean converged = false;
 
         while (!converged && counter < numberOfIteration){
-
+            //printCenters();
             System.out.println("第"+counter+"次迭代");
 
-           // printCenters();
             double[][] distanceMatrix = new double[vectors.size()][numberOfCluster];
 
             //生成距离矩阵
@@ -107,10 +103,15 @@ public class KMeans {
 
         System.out.println("聚类完成\n迭代次数"+counter);
 
-      //  printClusters();
+        //printClusters();
 
     }
 
+    /**
+     * 检测是否收敛(中心点和上次比是否变化)
+     * @param lastCenters
+     * @return
+     */
     private boolean isConverged(List<MyVector> lastCenters){
 
         if (lastCenters.size() != numberOfCluster){
@@ -138,7 +139,11 @@ public class KMeans {
 
     }
 
-
+    /**
+     * 得到数组中最小值的下标
+     * @param arr
+     * @return
+     */
     private int getMinDistanceIndex(double[] arr){
 
         double min = 99999999999999999999999.0;
@@ -153,6 +158,10 @@ public class KMeans {
         return index;
     }
 
+    /**
+     * 打印二维数组
+     * @param mat
+     */
     private void printMatrix(double[][] mat){
 
         int height = mat.length;
@@ -166,6 +175,9 @@ public class KMeans {
         }
     }
 
+    /**
+     * 打印中心点
+     */
     private void printCenters(){
         System.out.println("Printing Centers");
         for (MyVector vector:centers){
@@ -173,6 +185,9 @@ public class KMeans {
         }
     }
 
+    /**
+     * 打印所有聚类
+     */
     private void printClusters(){
         for (Cluster cluster:clusters){
             cluster.printCluster(false);
@@ -198,36 +213,22 @@ public class KMeans {
 
     public static void main(String[] args){
         List<MyVector> vectors = new ArrayList<>();
-        vectors.add(new MyVector(new double[]{1.0, 1.0}));
-        vectors.add(new MyVector(new double[]{9.0, 8.0}));
         vectors.add(new MyVector(new double[]{2.0, 1.0}));
         vectors.add(new MyVector(new double[]{3.0, 2.0}));
         vectors.add(new MyVector(new double[]{10.0, 10.0}));
         vectors.add(new MyVector(new double[]{7.0, 8.0}));
         vectors.add(new MyVector(new double[]{3.0, 1.0}));
         vectors.add(new MyVector(new double[]{8.0, 9.0}));
-        vectors.add(new MyVector(new double[]{367, 10.0}));
         vectors.add(new MyVector(new double[]{10.0, 7.0}));
         vectors.add(new MyVector(new double[]{33.0, 8.0}));
         vectors.add(new MyVector(new double[]{1.0, 2.0}));
         vectors.add(new MyVector(new double[]{33.0, 9.0}));
         vectors.add(new MyVector(new double[]{35.0, 7.0}));
-        vectors.add(new MyVector(new double[]{100.0, 9.0}));
         vectors.add(new MyVector(new double[]{33.0, 10.0}));
         vectors.add(new MyVector(new double[]{8.0, 10.0}));
-        vectors.add(new MyVector(new double[]{105.0, 7.0}));
-        vectors.add(new MyVector(new double[]{99.0, 8.0}));
-        vectors.add(new MyVector(new double[]{1.0, 4.0}));
-        vectors.add(new MyVector(new double[]{101.0, 10.0}));
-        vectors.add(new MyVector(new double[]{333, 8.0}));
-        vectors.add(new MyVector(new double[]{444, 9.0}));
-        vectors.add(new MyVector(new double[]{423, 7.0}));
         vectors.add(new MyVector(new double[]{0.1, 2.0}));
-        KMeans kMeans = new KMeans(vectors,5);
+        KMeans kMeans = new KMeans(vectors,3);
         kMeans.startClustering();
-
-
-
     }
 
 

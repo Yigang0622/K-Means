@@ -3,7 +3,7 @@ package Algo;
 import java.util.ArrayList;
 
 /**
- * 簇
+ * 聚类
  * Created by Mike on 12/9/2016.
  */
 public class Cluster {
@@ -59,36 +59,6 @@ public class Cluster {
         return vector;
     }
 
-    private boolean hasVector(MyVector vector){
-
-        boolean has = false;
-
-        for(MyVector mVector:vectors){
-            if (mVector.isSameVector(vector)){
-                has = true;
-            }
-        }
-
-        return has;
-    }
-
-    public boolean isSameCluster(Cluster cluster){
-
-        if (cluster.eachVectorSize != this.eachVectorSize){
-            return false;
-        }
-
-        int counter = 0;
-        for (MyVector vector:cluster.getVectors()){
-            if (hasVector(vector)){
-                counter ++;
-            }
-        }
-
-        return counter == vectors.size();
-
-    }
-
 
 
     public static void main(String[] args){
@@ -102,7 +72,6 @@ public class Cluster {
         cluster2.addToCluster(myVector2);
         cluster2.addToCluster(myVector);
 
-        System.out.println(cluster.isSameCluster(cluster2));
 
 
 
